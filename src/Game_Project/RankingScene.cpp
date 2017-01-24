@@ -59,6 +59,9 @@ void RankingScene::Update(void) {
 	}
 
 	if (!set) {
+		//Se comprueba de donde viene el jugador, si de el menú o del juego, en caso de venir del menu debe 
+		//Escribir por consola 0,1 o 2 para mostrar uno de los rankings.
+		//En caso de venir del juego, se consigue de forma automatica la dificultad desde el XML
 		if (!deGame) {
 			cout << "En que dificultad quieres ver el ranking?" << endl;
 			cout << "0: Fácil" << endl;
@@ -82,9 +85,9 @@ void RankingScene::Update(void) {
 		}
 		else {
 			dif = Niveles::GetValue("Dificultad");
-			cout << "Vienes del menu eeh -- DIFICULTAD - " << dif << endl;
 		}
 
+		//Se leen los archivos binarios en función de la dificultad
 		instanciaRank.LeerBinario(dif);
 
 		set = true;
@@ -94,6 +97,8 @@ void RankingScene::Update(void) {
 		MakeTextures();
 		set = true;
 		difficulty.transform = { W.GetWidth() / 8 * 6,0,200,200 };
+
+		//Este switch cambia la imagen del Sprite que representa la dificultad que se esta mostrando en el ranking en este momento
 		switch (dif) {
 		case 0:
 			difficulty.objectID = ObjectID::S_03;
