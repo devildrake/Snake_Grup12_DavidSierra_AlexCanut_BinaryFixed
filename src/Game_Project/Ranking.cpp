@@ -24,15 +24,17 @@ void Ranking::LeerBinario(int n) {
 		}
 }
 */
-void Ranking::EscribirBinario(int n) {
-
+	void Ranking::EscribirBinario(int n) {
+		for (int i = 0; i < 10; i++) {
+			ranking[i].nameSize = ranking[i].name.size();
+		}
 	if (n == 0) {
 		ofstream fSalida("rankingEasy.dat", ios::out | ios::binary);
 
 		for (int i = 0; i < 10; i++) {
-			size_t size2Write = ranking[i].nameSize;
-			fSalida.write(reinterpret_cast<char*>(&size2Write), sizeof(size_t));
-			fSalida.write(ranking[i].name.data(), size2Write);
+			//size_t size2Write = ranking[i].nameSize;
+			fSalida.write(reinterpret_cast<char*>(&ranking[i].nameSize), sizeof(size_t));
+			fSalida.write(ranking[i].name.data(), ranking[i].nameSize);
 			fSalida.write(reinterpret_cast<char*>(&ranking[i].highScore), sizeof(int));
 		}
 		fSalida.close();
@@ -41,9 +43,9 @@ void Ranking::EscribirBinario(int n) {
 		ofstream fSalida("rankingMed.dat", ios::out | ios::binary);
 
 		for (int i = 0; i < 10; i++) {
-			size_t size2Write = ranking[i].nameSize;
-			fSalida.write(reinterpret_cast<char*>(&size2Write), sizeof(size_t));
-			fSalida.write(ranking[i].name.data(), size2Write);
+			//size_t size2Write = ranking[i].nameSize;
+			fSalida.write(reinterpret_cast<char*>(&ranking[i].nameSize), sizeof(size_t));
+			fSalida.write(ranking[i].name.data(), ranking[i].nameSize);
 			fSalida.write(reinterpret_cast<char*>(&ranking[i].highScore), sizeof(int));
 		}
 		fSalida.close();
@@ -53,9 +55,9 @@ void Ranking::EscribirBinario(int n) {
 		ofstream fSalida("rankingHard.dat", ios::out | ios::binary);
 
 		for (int i = 0; i < 10; i++) {
-			size_t size2Write = ranking[i].nameSize;
-			fSalida.write(reinterpret_cast<char*>(&size2Write), sizeof(size_t));
-			fSalida.write(ranking[i].name.data(), size2Write);
+			//size_t size2Write = ranking[i].nameSize;
+			fSalida.write(reinterpret_cast<char*>(&ranking[i].nameSize), sizeof(size_t));
+			fSalida.write(ranking[i].name.data(), ranking[i].nameSize);
 			fSalida.write(reinterpret_cast<char*>(&ranking[i].highScore), sizeof(int));
 		}
 		fSalida.close();
@@ -81,9 +83,9 @@ void Ranking::LeerBinario(int n) {
 		if (!exist("rankingEasy.dat")) {
 			ofstream fSalida("rankingEasy.dat", ios::out | ios::binary);
 			for (int i = 0; i < 10; i++) {
-				size_t size2Write = ranking[i].nameSize;
-				fSalida.write(reinterpret_cast<char*>(&size2Write), sizeof(size_t));
-				fSalida.write(ranking[i].name.data(), size2Write);
+				//size_t size2Write = ranking[i].nameSize;
+				fSalida.write(reinterpret_cast<char*>(&ranking[i].nameSize), sizeof(size_t));
+				fSalida.write(ranking[i].name.data(), ranking[i].nameSize);
 				fSalida.write(reinterpret_cast<char*>(&ranking[i].highScore), sizeof(int));
 			}
 			fSalida.close();
@@ -92,10 +94,10 @@ void Ranking::LeerBinario(int n) {
 		ifstream fEntrada("rankingEasy.dat", ios::in | ios::binary);
 
 		for (int i = 0; i < 10; i++) {
-			size_t size2Read = ranking[i].nameSize;
-			fEntrada.read(reinterpret_cast<char*>(&size2Read), sizeof(size_t));
-			ranking[i].name = std::string("", size2Read);
-			fEntrada.read(&*ranking[i].name.begin(), size2Read);
+			//size_t size2Read = ranking[i].nameSize;
+			fEntrada.read(reinterpret_cast<char*>(&ranking[i].nameSize), sizeof(size_t));
+			ranking[i].name = std::string("", ranking[i].nameSize);
+			fEntrada.read(&*ranking[i].name.begin(), ranking[i].nameSize);
 			fEntrada.read(reinterpret_cast<char*>(&ranking[i].highScore), sizeof(int));
 		}
 		fEntrada.close();
@@ -105,9 +107,9 @@ void Ranking::LeerBinario(int n) {
 		if (!exist("rankingMed.dat")) {
 			ofstream fSalida("rankingMed.dat", ios::out | ios::binary);
 			for (int i = 0; i < 10; i++) {
-				size_t size2Write = ranking[i].nameSize;
-				fSalida.write(reinterpret_cast<char*>(&size2Write), sizeof(size_t));
-				fSalida.write(ranking[i].name.data(), size2Write);
+				//size_t size2Write = ranking[i].nameSize;
+				fSalida.write(reinterpret_cast<char*>(&ranking[i].nameSize), sizeof(size_t));
+				fSalida.write(ranking[i].name.data(), ranking[i].nameSize);
 				fSalida.write(reinterpret_cast<char*>(&ranking[i].highScore), sizeof(int));
 			}
 			fSalida.close();
@@ -117,10 +119,10 @@ void Ranking::LeerBinario(int n) {
 		ifstream fEntrada("rankingMed.dat", ios::in | ios::binary);
 
 		for (int i = 0; i < 10; i++) {
-			size_t size2Read = ranking[i].nameSize;
-			fEntrada.read(reinterpret_cast<char*>(&size2Read), sizeof(size_t));
-			ranking[i].name = std::string("", size2Read);
-			fEntrada.read(&*ranking[i].name.begin(), size2Read);
+			//size_t size2Read = ranking[i].nameSize;
+			fEntrada.read(reinterpret_cast<char*>(&ranking[i].nameSize), sizeof(size_t));
+			ranking[i].name = std::string("", ranking[i].nameSize);
+			fEntrada.read(&*ranking[i].name.begin(), ranking[i].nameSize);
 			fEntrada.read(reinterpret_cast<char*>(&ranking[i].highScore), sizeof(int));
 		}
 		fEntrada.close();
@@ -130,9 +132,9 @@ void Ranking::LeerBinario(int n) {
 		if (!exist("rankingHard.dat")) {
 			ofstream fSalida("rankingHard.dat", ios::out | ios::binary);
 			for (int i = 0; i < 10; i++) {
-				size_t size2Write = ranking[i].nameSize;
-				fSalida.write(reinterpret_cast<char*>(&size2Write), sizeof(size_t));
-				fSalida.write(ranking[i].name.data(), size2Write);
+				//size_t size2Write = ranking[i].nameSize;
+				fSalida.write(reinterpret_cast<char*>(&ranking[i].nameSize), sizeof(size_t));
+				fSalida.write(ranking[i].name.data(), ranking[i].nameSize);
 				fSalida.write(reinterpret_cast<char*>(&ranking[i].highScore), sizeof(int));
 			}
 			fSalida.close();
@@ -141,10 +143,10 @@ void Ranking::LeerBinario(int n) {
 		ifstream fEntrada("rankingHard.dat", ios::in | ios::binary);
 
 		for (int i = 0; i < 10; i++) {
-			size_t size2Read = ranking[i].nameSize;
-			fEntrada.read(reinterpret_cast<char*>(&size2Read), sizeof(size_t));
-			ranking[i].name = string("", size2Read);
-			fEntrada.read(&*ranking[i].name.begin(), size2Read);
+			//size_t size2Read = ranking[i].nameSize;
+			fEntrada.read(reinterpret_cast<char*>(&ranking[i].nameSize), sizeof(size_t));
+			ranking[i].name = string("", ranking[i].nameSize);
+			fEntrada.read(&*ranking[i].name.begin(), ranking[i].nameSize);
 			fEntrada.read(reinterpret_cast<char*>(&ranking[i].highScore), sizeof(int));
 		}
 		fEntrada.close();
